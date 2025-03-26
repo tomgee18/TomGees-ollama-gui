@@ -1,6 +1,9 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import styles from "./chat.module.css";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export default function Chat() {
   const [messages, setMessages] = useState([{ role: "system", content: "Hello! I'm Neo, your AI coding assistant. Ask me anything about programming!" }]);
@@ -87,7 +90,35 @@ export default function Chat() {
             }`}
           >
             <div className={styles.role}>{message.role}</div>
-            <div className={styles.content}>{message.content}</div>
+            <div className={styles.content}>
+              {message.role === 'ai' || message.role === 'system' ? (
+                <ReactMarkdown
+                  components={{
+                    code({node, inline, className, children, ...props}) {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return !inline && match ? (
+                        <SyntaxHighlighter
+                          style={vscDarkPlus}
+                          language={match[1]}
+                          PreTag="div"
+                          {...props}
+                        >
+                          {String(children).replace(/\n$/, '')}
+                        </SyntaxHighlighter>
+                      ) : (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      );
+                    }
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              ) : (
+                message.content
+              )}
+            </div>
           </div>
         ))}
         
