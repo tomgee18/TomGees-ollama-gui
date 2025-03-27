@@ -9,6 +9,8 @@ export default function Chat() {
   const [messages, setMessages] = useState([{ role: "system", content: "Hello! I'm Neo, your AI coding assistant. Ask me anything about programming!" }]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [models, setModels] = useState([]);
+  const [selectedModel, setSelectedModel] = useState("gemma3:4b");
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   
@@ -22,6 +24,26 @@ export default function Chat() {
     inputRef.current?.focus();
   }, []);
 
+  // Fetch available models on component mount
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const response = await fetch("http://localhost:11434/api/tags");
+        const data = await response.json();
+        if (data.models && Array.isArray(data.models)) {
+          setModels(data.models);
+          // Set default model if available
+          if (data.models.length > 0) {
+            setSelectedModel(data.models[0].name);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching models:", error);
+      }
+    };
+    
+    fetchModels();
+  }, []);
   const sendMessage = async () => {
     if (!input) return;
     const newMessages = [...messages, { role: "user", content: input }];
@@ -35,8 +57,7 @@ export default function Chat() {
     const response = await fetch("http://localhost:11434/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify({ model: "codellama",  prompt: input }), // without history
-      body: JSON.stringify({ model: "gemma3:4b",  prompt: history, stream: true }), // with history
+      body: JSON.stringify({ model: selectedModel, prompt: history, stream: true }),
     });
   
     // Read the stream line by line
@@ -79,6 +100,25 @@ export default function Chat() {
     <div className={styles.chatContainer}>
       <div className={styles.header}>
         Chat with Neo
+        <div className={styles.modelSelector}>
+          <select 
+            value={selectedModel} 
+            onChange={(e) => setSelectedModel(e.target.value)}
+            className={styles.modelDropdown}
+            disabled={isLoading || messages.length > 1}
+            title={messages.length > 1 ? "Cannot switch models during an active conversation" : "Select a model"}
+          >
+            {models.length > 0 ? (
+              models.map((model) => (
+                <option key={model.name} value={model.name}>
+                  {model.name}
+                </option>
+              ))
+            ) : (
+              <option value="gemma3:4b">gemma3:4b</option>
+            )}
+          </select>
+        </div>
       </div>
       
       <div className={styles.messagesContainer}>
