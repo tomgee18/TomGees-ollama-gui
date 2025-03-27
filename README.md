@@ -19,8 +19,13 @@ A modern, user-friendly web interface for interacting with locally installed LLM
 
 1. Install Ollama and download your preferred models:
    
-   # Install Ollama from https://ollama.ai/
-   # Then pull your desired models, for example:
+    Install Ollama from https://ollama.ai/ or run the following command:
+
+   ```bash
+   curl -fsSL https://ollama.com/install.sh | sh
+   ```
+   Then pull your desired models, for example:
+
    ```bash
    ollama pull gemma:3b
    ```
