@@ -28,11 +28,15 @@ export default function Chat() {
     setMessages(newMessages);
     setInput("");
     setIsLoading(true);
+
+    const history = newMessages.map(m => `${m.role}: ${m.content}`).join("\n");
+    console.log("History:", history);
   
     const response = await fetch("http://localhost:11434/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "codellama", prompt: input }),
+      // body: JSON.stringify({ model: "codellama",  prompt: input }), // without history
+      body: JSON.stringify({ model: "gemma3:4b",  prompt: history, stream: true }), // with history
     });
   
     // Read the stream line by line
