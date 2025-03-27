@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ollama GUI
 
-## Getting Started
+A modern, user-friendly web interface for interacting with locally installed LLM models via Ollama. This project provides an intuitive chat interface that allows you to communicate with various language models running on your local machine.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🚀 Clean, modern chat interface
+- 💬 Real-time streaming responses
+- 🔄 Dynamic model switching
+- 🎨 Markdown and code syntax highlighting
+- 📱 Responsive design for all devices
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Prerequisites
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. [Node.js](https://nodejs.org/) (v18 or higher)
+2. [Ollama](https://ollama.ai/) - for running LLM models locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup
 
-## Learn More
+1. Install Ollama and download your preferred models:
+   
+   # Install Ollama from https://ollama.ai/
+   # Then pull your desired models, for example:
+   ```bash
+   ollama pull gemma:3b
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Clone and set up the project:
+   ```bash
+   git clone git@github.com:khokonm/ollama-gui.git
+   cd ollama-gui
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Select your preferred model from the dropdown menu in the header
+2. Type your message in the input field
+3. Press Enter or click the Send button to chat with the model
+4. The model's responses will stream in real-time with proper formatting for code and markdown
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Development
+
+This project is built with:
+- [Next.js](https://nextjs.org/) - React framework
+- [React Markdown](https://github.com/remarkjs/react-markdown) - Markdown rendering
+- [Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter) - Code highlighting
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT
