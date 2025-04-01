@@ -10,7 +10,7 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [models, setModels] = useState([]);
-  const [selectedModel, setSelectedModel] = useState("gemma3:4b");
+  const [selectedModel, setSelectedModel] = useState("");
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   
@@ -108,15 +108,14 @@ export default function Chat() {
             disabled={isLoading || messages.length > 1}
             title={messages.length > 1 ? "Cannot switch models during an active conversation" : "Select a model"}
           >
-            {models.length > 0 ? (
-              models.map((model) => (
-                <option key={model.name} value={model.name}>
-                  {model.name}
-                </option>
-              ))
-            ) : (
-              <option value="gemma3:4b">gemma3:4b</option>
-            )}
+            <option value="" disabled={models.length > 0}>
+              {models.length > 0 ? "Select a model" : "No models installed"}
+            </option>
+            {models.map((model) => (
+              <option key={model.name} value={model.name}>
+                {model.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>
