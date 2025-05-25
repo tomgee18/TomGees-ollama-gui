@@ -117,6 +117,23 @@
   cursor: not-allowed;
 }
 
+.themeToggleButton {
+  padding: 6px 12px;
+  border-radius: 16px;
+  background: var(--gray-alpha-200);
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+}
+
+.themeToggleButton:hover {
+  background: var(--gray-alpha-300);
+}
+
 /* Styles for the implicit first row of the header if needed */
 .headerTopRow {
   display: flex;

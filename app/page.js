@@ -16,6 +16,7 @@ export default function Chat() {
   const [temperature, setTemperature] = useState(0.7);
   const [topK, setTopK] = useState(50);
   const [topP, setTopP] = useState(0.9);
+  const [theme, setTheme] = useState('light'); // Default to light, will be updated by useEffect
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   
@@ -45,6 +46,28 @@ export default function Chat() {
     }
   }, []);
 
+  // Initialize theme based on localStorage or system preference
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('themePreference');
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      setTheme(storedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+    } else {
+      setTheme('light'); // Default to light if no preference found
+    }
+  }, []);
+
+  // Apply theme to DOM and save to localStorage
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('themePreference', theme);
+    } catch (error) {
+      console.error("Failed to save theme preference to localStorage:", error);
+    }
+  }, [theme]);
+
   // Fetch available models on component mount
   useEffect(() => {
     const fetchModels = async () => {
@@ -73,6 +96,10 @@ export default function Chat() {
     } catch (error) {
       console.error("Failed to remove chat history from localStorage:", error);
     }
+  };
+
+  const handleToggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   const sendMessage = async () => {
@@ -148,11 +175,18 @@ export default function Chat() {
   };
 
   return (
-    <div className={styles.chatContainer}>
+    <div className={styles.chatContainer} data-theme={theme}> {/* Apply theme to container for scoping if needed */}
       <div className={styles.header}>
         <div className={styles.headerTopRow}> {/* Added this wrapper */}
           Chat with Neo
           <div className={styles.headerControls}>
+            <button 
+              onClick={handleToggleTheme} 
+              className={styles.themeToggleButton}
+              title={theme === 'light' ? "Switch to Dark Theme" : "Switch to Light Theme"}
+            >
+              {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+            </button>
             <div className={styles.modelSelector}>
               <select 
               value={selectedModel} 

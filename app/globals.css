@@ -1,14 +1,25 @@
-:root {
+/* Light Theme (default or when data-theme='light') */
+html[data-theme='light'] {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light; /* Explicitly set color scheme */
 }
 
+/* Dark Theme (when data-theme='dark') */
+html[data-theme='dark'] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  color-scheme: dark; /* Explicitly set color scheme */
+}
+
+/* Remove the media query for defining variables, as JS now handles initial theme setting based on it.
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+*/
 
 html,
 body {
@@ -35,8 +46,10 @@ a {
   text-decoration: none;
 }
 
+/*
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
+*/
