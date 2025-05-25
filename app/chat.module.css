@@ -11,8 +11,9 @@
   padding: 16px 24px;
   border-bottom: 1px solid var(--gray-alpha-200);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between; align-items: center; -- Replaced by column layout */
+  flex-direction: column; /* Changed to column for header sections */
+  align-items: stretch; /* Children will take full width */
   font-weight: 600;
   font-size: 18px;
   position: sticky;
@@ -21,6 +22,60 @@
   z-index: 10;
 }
 
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.parameterSettings {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Centered the controls */
+  align-items: center;
+  padding-top: 12px; /* Space from headerControls */
+  gap: 10px; /* Gap between each parameter control */
+  border-top: 1px solid var(--gray-alpha-100); /* Optional: visual separator */
+  margin-top: 12px; /* Optional: visual separator */
+}
+
+.parameterControl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px; /* Label font size */
+  color: var(--foreground);
+}
+
+.parameterInput {
+  padding: 4px 8px; /* Slightly smaller padding than modelDropdown */
+  border-radius: 12px; /* Smaller radius */
+  background: var(--gray-alpha-200);
+  color: var(--foreground);
+  font-size: 13px;
+  border: 1px solid var(--gray-alpha-200); /* Match border */
+  outline: none;
+  width: 70px; /* Fixed width for number inputs */
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.parameterInput:hover {
+  background: var(--gray-alpha-300);
+  border-color: var(--gray-alpha-300);
+}
+
+.parameterInput:focus {
+  border-color: #2563eb; /* Highlight focus */
+}
+
+.parameterInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--gray-alpha-100); /* Different background for disabled */
+}
+
+
+/* Removing the old .clearButton as it's not used and could be confusing.
 .clearButton {
   position: absolute;
   right: 16px;
@@ -37,6 +92,37 @@
 
 .clearButton:hover {
   background: var(--gray-alpha-300);
+}
+*/
+
+.clearHistoryButton {
+  padding: 6px 12px;
+  border-radius: 16px;
+  background: var(--gray-alpha-200);
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+}
+
+.clearHistoryButton:hover {
+  background: var(--gray-alpha-300);
+}
+
+.clearHistoryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Styles for the implicit first row of the header if needed */
+.headerTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .messagesContainer {
@@ -206,8 +292,7 @@
 }
 
 .modelSelector {
-  display: flex;
-  align-items: center;
+  /* display: flex; align-items: center; */ /* No longer needed here, handled by headerControls */
 }
 
 .modelDropdown {
