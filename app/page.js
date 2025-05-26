@@ -285,14 +285,42 @@ export default function Chat() {
                     code({node, inline, className, children, ...props}) {
                       const match = /language-(\w+)/.exec(className || '');
                       return !inline && match ? (
-                        <SyntaxHighlighter
-                          style={vscDarkPlus}
-                          language={match[1]}
-                          PreTag="div"
-                          {...props}
-                        >
-                          {String(children).replace(/\n$/, '')}
-                        </SyntaxHighlighter>
+                        <div className={styles.codeBlockWrapper}>
+                          <button
+                            className={styles.copyCodeButton}
+                            onClick={async (e) => {
+                              const buttonElement = e.target;
+                              const codeToCopy = String(children).replace(/\n$/, '');
+                              try {
+                                await navigator.clipboard.writeText(codeToCopy);
+                                buttonElement.textContent = 'Copied!';
+                                setTimeout(() => {
+                                  if (buttonElement) { // Check if element still exists
+                                      buttonElement.textContent = 'Copy';
+                                  }
+                                }, 2000);
+                              } catch (err) {
+                                console.error('Failed to copy code:', err);
+                                buttonElement.textContent = 'Error!';
+                                setTimeout(() => {
+                                  if (buttonElement) { // Check if element still exists
+                                      buttonElement.textContent = 'Copy';
+                                  }
+                                }, 2000);
+                              }
+                            }}
+                          >
+                            Copy
+                          </button>
+                          <SyntaxHighlighter
+                            style={vscDarkPlus}
+                            language={match[1]}
+                            PreTag="div"
+                            {...props}
+                          >
+                            {String(children).replace(/\n$/, '')}
+                          </SyntaxHighlighter>
+                        </div>
                       ) : (
                         <code className={className} {...props}>
                           {children}

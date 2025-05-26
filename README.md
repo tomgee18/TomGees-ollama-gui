@@ -214,3 +214,45 @@ Add the following CSS class definition to `app/chat.module.css`:
 ```
 
 **Note:** Adjust the specific values (padding, border-radius, font-size, background colors like `var(--gray-alpha-200)`, `var(--gray-alpha-300)`) to match the existing styles of buttons like `.modelDropdown` or `.clearHistoryButton` in your `app/chat.module.css` file for perfect visual consistency. The variables `--gray-alpha-200` and `--gray-alpha-300` might need to be defined in `app/globals.css` if they don't exist, or replaced with hardcoded color values that fit your theme.
+
+### 4. Styles for Copy Code Button (Manual Addition for `app/chat.module.css`)
+
+The following CSS styles are for the "Copy Code" button feature. These should be added to `app/chat.module.css`. This guide is provided due to difficulties applying these styles automatically.
+
+**a. Style for the Code Block Wrapper:**
+
+This class is applied to the `div` that wraps the `SyntaxHighlighter` and the copy button.
+
+```css
+.codeBlockWrapper {
+  position: relative;
+}
+```
+
+**b. Style for the Copy Button:**
+
+This class is applied to the copy button itself.
+
+```css
+.copyCodeButton {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  padding: 0.25em 0.5em;
+  font-size: 0.8em;
+  background-color: var(--gray-alpha-300); /* Adjust variable or use hex code if needed */
+  color: var(--foreground);
+  border: 1px solid var(--gray-alpha-400); /* Adjust variable or use hex code if needed */
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.copyCodeButton:hover {
+  opacity: 1;
+  background-color: var(--gray-alpha-400); /* Adjust variable or use hex code if needed */
+}
+```
+
+**Note on CSS Variables:** The variables `--gray-alpha-300` and `--gray-alpha-400` are placeholders. If these specific variables are not defined in your `app/globals.css`, you should replace them with appropriate hardcoded color values (e.g., for a subtle gray that works in both light and dark themes, or use different colors based on the active theme if you further customize your CSS variable setup). For example, `background-color: #8883;` (a semi-transparent dark gray) might be a starting point for `background-color` if variables are not available.
