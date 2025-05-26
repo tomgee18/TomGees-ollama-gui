@@ -1,25 +1,23 @@
-/* Light Theme (default or when data-theme='light') */
+/* Default/Fallback values (optional, as data-theme should always be set by JS) */
+:root {
+  --background: #ffffff; /* Light theme default background */
+  --foreground: #171717; /* Light theme default foreground */
+  /* Add any other global CSS variables your app uses that might not be theme-dependent */
+}
+
 html[data-theme='light'] {
   --background: #ffffff;
   --foreground: #171717;
-  color-scheme: light; /* Explicitly set color scheme */
+  /* Define any other light-theme specific variables here */
+  color-scheme: light;
 }
 
-/* Dark Theme (when data-theme='dark') */
 html[data-theme='dark'] {
   --background: #0a0a0a;
   --foreground: #ededed;
-  color-scheme: dark; /* Explicitly set color scheme */
+  /* Define any other dark-theme specific variables here */
+  color-scheme: dark;
 }
-
-/* Remove the media query for defining variables, as JS now handles initial theme setting based on it.
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-*/
 
 html,
 body {
@@ -45,11 +43,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-/*
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-*/

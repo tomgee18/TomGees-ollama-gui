@@ -16,7 +16,7 @@ export default function Chat() {
   const [temperature, setTemperature] = useState(0.7);
   const [topK, setTopK] = useState(50);
   const [topP, setTopP] = useState(0.9);
-  const [theme, setTheme] = useState('light'); // Default to light, will be updated by useEffect
+  const [theme, setTheme] = useState('light'); // Default, will be updated by useEffect
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   
@@ -46,19 +46,18 @@ export default function Chat() {
     }
   }, []);
 
-  // Initialize theme based on localStorage or system preference
+  // Initialize Theme on Mount (from README)
   useEffect(() => {
-    const storedTheme = localStorage.getItem('themePreference');
-    if (storedTheme === 'light' || storedTheme === 'dark') {
-      setTheme(storedTheme);
+    const savedTheme = localStorage.getItem('themePreference');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      setTheme(savedTheme);
     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme('dark');
-    } else {
-      setTheme('light'); // Default to light if no preference found
     }
+    // Default to 'light' is already handled by useState initial value
   }, []);
 
-  // Apply theme to DOM and save to localStorage
+  // Apply Theme and Persist on Change (from README)
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     try {
@@ -98,6 +97,7 @@ export default function Chat() {
     }
   };
 
+  // Add Theme Toggle Handler Function (from README)
   const handleToggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
@@ -175,13 +175,14 @@ export default function Chat() {
   };
 
   return (
-    <div className={styles.chatContainer} data-theme={theme}> {/* Apply theme to container for scoping if needed */}
+    <div className={styles.chatContainer} data-theme={theme}> {/* Added data-theme based on instructions for html tag, also good for local scoping */}
       <div className={styles.header}>
         <div className={styles.headerTopRow}> {/* Added this wrapper */}
           Chat with Neo
           <div className={styles.headerControls}>
-            <button 
-              onClick={handleToggleTheme} 
+            {/* Theme Toggle Button (from README) */}
+            <button
+              onClick={handleToggleTheme}
               className={styles.themeToggleButton}
               title={theme === 'light' ? "Switch to Dark Theme" : "Switch to Light Theme"}
             >
