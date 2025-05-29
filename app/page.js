@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
-const INITIAL_SYSTEM_MESSAGE = { role: "system", content: "Hello! I'm Neo, your AI coding assistant. Ask me anything about programming!" };
+const INITIAL_SYSTEM_MESSAGE = { role: "system", content: "Hello! I'm TomAssist. How can I help you today?" };
 
 export default function Chat() {
   const [messages, setMessages] = useState([INITIAL_SYSTEM_MESSAGE]);
@@ -178,7 +178,7 @@ export default function Chat() {
     <div className={styles.chatContainer} data-theme={theme}> {/* Added data-theme based on instructions for html tag, also good for local scoping */}
       <div className={styles.header}>
         <div className={styles.headerTopRow}> {/* Added this wrapper */}
-          Chat with Neo
+          Chat with TomAssist
           <div className={styles.headerControls}>
             {/* Theme Toggle Button (from README) */}
             <button
@@ -340,7 +340,7 @@ export default function Chat() {
         
         {isLoading && (
           <div className={styles.loading}>
-            <span>Neo is thinking</span>
+            <span>TomAssist is thinking</span>
             <div className={styles.loadingDots}>
               <div className={styles.dot}></div>
               <div className={styles.dot}></div>
