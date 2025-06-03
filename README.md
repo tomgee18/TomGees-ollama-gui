@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ollama GUI
 
 A modern, user-friendly web interface for interacting with locally installed LLM models via Ollama. This project provides an intuitive chat interface that allows you to communicate with various language models running on your local machine.
@@ -256,3 +257,6 @@ This class is applied to the copy button itself.
 ```
 
 **Note on CSS Variables:** The variables `--gray-alpha-300` and `--gray-alpha-400` are placeholders. If these specific variables are not defined in your `app/globals.css`, you should replace them with appropriate hardcoded color values (e.g., for a subtle gray that works in both light and dark themes, or use different colors based on the active theme if you further customize your CSS variable setup). For example, `background-color: #8883;` (a semi-transparent dark gray) might be a starting point for `background-color` if variables are not available.
+=======
+# Here are your Instructions
+>>>>>>> c8190b3c63acf8071f24c721d2b9b9c3259d6e27

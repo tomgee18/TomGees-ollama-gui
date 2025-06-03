@@ -1,4 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+<<<<<<< HEAD
 
 # dependencies
 /node_modules
@@ -17,6 +18,25 @@
 /.next/
 /out/
 
+=======
+.idea/
+dist
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+.vscode
+# testing
+/coverage
+dump.rdb
+chainlit.md
+.chainlit
+# next.js
+/.next/
+/out/
+.ipynb_checkpoints/
+>>>>>>> c8190b3c63acf8071f24c721d2b9b9c3259d6e27
 # production
 /build
 
@@ -28,14 +48,55 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
 .env*
 
+=======
+
+# local env files
+# .env*.local
+*token.json*
+>>>>>>> c8190b3c63acf8071f24c721d2b9b9c3259d6e27
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
+=======
+*pyc*
+#*.env
+.ac
+agenthub/agents/youtube/db
+*credentials.json*
+
+venv/
+.venv/
+__pycache__/
+
+# ===================
+# ADDITIONAL RULES TO PREVENT FILE SIZE VIOLATIONS
+# ===================
+# Archive files (anywhere in the project)
+**/*.zip
+**/*.tar.gz
+**/*.tar
+**/*.tgz
+
+# Build caches and artifacts
+.cache/
+*.pack
+
+# System packages
+*.deb
+
+# Python native libraries
+*.dylib
+
+# Android SDK
+android-sdk/
+>>>>>>> c8190b3c63acf8071f24c721d2b9b9c3259d6e27
